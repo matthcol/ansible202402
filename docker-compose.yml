@@ -1,0 +1,27 @@
+version: '3.5'
+
+services:
+
+  pilot:
+    image: debianssh12
+    build: ./debianssh12
+    hostname: pilot
+    ports:
+      - ${SSH_PORT0:-22}:22
+    volumes:
+      - ./ansible:/home/srvadmin/ansible
+      - ./artifacts:/mnt/artifacts
+
+  host1:
+    image: debianssh12
+    build: ./debianssh12
+    hostname: host1
+    ports:
+      - ${SSH_PORT1:-23}:22
+
+  host2:
+    image: rockyssh9
+    build: ./rockyssh9
+    hostname: host2
+    ports:
+      - ${SSH_PORT2:-24}:22
