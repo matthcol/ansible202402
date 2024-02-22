@@ -16,7 +16,7 @@ docker compose up host5 -d
 
 
 ### Bash on pilot host (host1)
-docker compose exec -it host1 bash
+docker compose exec -it pilot bash
 
 ### Ssh commands
 ```
