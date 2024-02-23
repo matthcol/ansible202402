@@ -56,3 +56,33 @@ ansible-playbook -i hosts -u deployuser -e "username=deployuser2" removeuser-pla
 # 03-appdb
 ansible-playbook -u deployuser -i hosts deploy-playbook.yml 
 
+# DAY 2
+
+# mode verbose
+ansible-playbook -u deployuser -i hosts -v deploy-playbook.yml 
+ansible-playbook -u deployuser -i hosts -vv deploy-playbook.yml 
+ansible-playbook -u deployuser -i hosts -vvv deploy-playbook.yml 
+
+# info pattern hosts/play
+ansible-playbook -i hosts --list-hosts deploy-playbook.yml
+
+# info tasks
+ansible-playbook -i hosts --list-tasks deploy-playbook.yml 
+
+ansible-playbook -i hosts --list-tasks --list-hosts deploy-playbook.yml 
+
+# play only a part 
+# start at task
+ansible-playbook -u deployuser -i hosts --start-at-task "Prepare Filesystem" deploy-playbook.yml
+# tags
+# https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_tags.html
+# NB: tag role => gathering_facts OK, tag task only => gathering_facts disable
+
+
+ ansible-playbook -u deployuser -i hosts -t API deploy-playbook.yml
+ ansible-playbook -u deployuser -i hosts -t DB deploy-playbook.yml
+ ansible-playbook -u deployuser -i hosts -t "USER,FS" deploy-playbook.yml
+
+ansible-playbook -u deployuser -i hosts -t "API" --skip-tags "USER,FS"  deploy-playbook.yml
+ansible-playbook -u deployuser -i hosts --start-at-task "Prepare Filesystem" deploy-playbook.yml
+

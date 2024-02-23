@@ -1,5 +1,11 @@
-[db]
+[db_rocky]
 host2
 
-[api]
+[db_debian]
+host5
+
+[api_debian]
 host1
+
+[api_rocky]
+host3

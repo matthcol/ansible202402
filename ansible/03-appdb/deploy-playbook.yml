@@ -1,12 +1,18 @@
 ---
 - name: Install Database
-  hosts: db
+  #hosts: db_*
+  hosts: db_debian
+  tags:
+    - DB
   become: yes
   roles:
     - common
     - db
 - name: Install API
-  hosts: api
+  tags:
+    - API
+    - never
+  hosts: api_rocky
   become: yes
   roles:
     - common

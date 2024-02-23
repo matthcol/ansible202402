@@ -5,17 +5,23 @@
     msg: "Begin role api"
     
 - name: Create group
+  tags:
+    - USER
   ansible.builtin.group:
     name: "{{ app_group }}"
     gid: "{{ app_gid }}"
 
 - name: Create user
+  tags: USER
   ansible.builtin.user:
     name: "{{ app_user }}"
     uid: "{{ app_uid }}"
     group: "{{ app_group }}"
+    shell: /usr/bin/bash
 
 - name: Prepare Filesystem
+  tags:
+    - FS
   ansible.builtin.file:
     path: /opt/{{ app_name }}/{{ item }}
     state: directory
