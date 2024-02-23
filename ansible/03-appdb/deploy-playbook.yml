@@ -8,6 +8,7 @@
   roles:
     - common
     - db
+    
 - name: Install API
   tags:
     - API

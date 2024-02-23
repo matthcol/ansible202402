@@ -5,7 +5,45 @@
   become_method: su
   become_exe: "sudo su -"
   block:
+
   - name: DB user
     community.postgresql.postgresql_user:
-      name: "{{ pg_app_user }}"
-      password: "{{ pg_app_password }}"
+      name: "{{ db_app_user }}"
+      password: "{{ db_app_password }}"
+
+  - name: DB movie
+    community.postgresql.postgresql_db:
+      name: "{{ db_app_dbname }}"
+      owner: "{{ db_app_user }}"
+
+  - name: DB general configuration
+    community.postgresql.postgresql_set:
+      name: listen_addresses
+      value: '*'
+    register: pg_conf_res
+
+  - name: DB pg_hba.conf
+    community.postgresql.postgresql_pg_hba:
+      dest: /etc/postgresql/{{ pg_version }}/main/pg_hba.conf
+      contype: host
+      users: "{{ db_app_user }}"
+      source: "{{ db_app_subnet }}"
+      databases: "{{ db_app_dbname }}"
+      method: scram-sha-256
+    register: pg_hba_res
+
+# go back to user root
+- name: Set fact Postgresql will be reload, restarted or not
+  ansible.builtin.set_fact:
+    future_pg_state: "{{ 'restarted' if pg_conf_res is changed else 'reloaded' if pg_hba_res is changed else 'keep' }}"
+
+- name: Display Restart or Reload will be done
+  tags: [DEBUG]
+  ansible.builtin.debug:
+    var: future_pg_state
+
+- name: Restart or Reload Postgresql
+  when: future_pg_state in ['restarted','reloaded']
+  ansible.builtin.systemd_service:
+    name: postgresql
+    state: "{{ future_pg_state }}"

@@ -1,4 +1,9 @@
 ---
 # defaults file for roles/common
-pg_app_user: umovie
-pg_app_password: password
+db_vendor: postgresql
+db_port: 5432
+db_app_user: umovie
+db_app_password: password
+db_app_dbname: dbmovie
+db_app_subnet: "192.168.0.0/24"
+db_hostname: "{{ groups.db_debian[0] }}"

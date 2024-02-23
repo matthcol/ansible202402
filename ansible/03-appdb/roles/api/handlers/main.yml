@@ -1,2 +1,14 @@
 ---
 # handlers file for roles/api
+- name: "Restart API"
+  vars:
+    api_name: "{{ app_list[1].app_name }}" 
+  ansible.builtin.systemd_service:
+    name: "{{ api_name }}"
+    state: restarted
+
+- name: "Restart dummy"
+  vars:
+    dummyapp_name: "{{ app_list[0].app_name }}" 
+  ansible.builtin.debug:
+    msg: "Dummy App restarted"

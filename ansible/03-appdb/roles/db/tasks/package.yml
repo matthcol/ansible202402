@@ -55,4 +55,4 @@
 
 - name: PostgreSQL package
   ansible.builtin.apt:
-    name: postgresql-{{ pg_version | default(16) }}
+    name: postgresql-{{ pg_version }}

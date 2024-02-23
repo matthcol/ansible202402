@@ -7,6 +7,17 @@
 - import_tasks: package.yml
   tags: [PACKAGE]
     
+- name: Debug JDBC Url and DB hostname
+  tags: 
+    - DEBUG
+    - never
+  vars:
+    debug_var:
+      app_jdbc_url: "{{ app_jdbc_url }}"
+      db_hostname: "{{ groups.db_debian[0] }}"
+  ansible.builtin.debug:
+    var: debug_var
+
 - include_tasks: application.yml
   # tags: [APPLICATION] => not very useful with -t, OK with --skip-tags
   tags: [APPLICATION]
@@ -15,10 +26,13 @@
     app_name: "{{ appli.app_name }}"
     app_binary: "{{ appli.app_binary }}"
     app_config: "{{ appli.app_config }}"
+    app_config_dir: "{{ appli.app_config_dir | default('etc') }}"
+    app_log_dir: "{{ appli.app_log_dir | default('log') }}"
     app_user: "{{ appli.app_user }}"
     app_group: "{{ appli.app_group }}"
     app_gid: "{{ appli.app_gid }}"
     app_uid: "{{ appli.app_uid }}"
+    app_notify: "{{ appli.app_notify | default('dummy') }}"
   loop: "{{ app_list }}"
   loop_control:
     loop_var: appli

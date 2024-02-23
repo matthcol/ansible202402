@@ -91,4 +91,13 @@ ansible-playbook -u deployuser -i hosts --start-at-task "Prepare Filesystem" dep
 allow_world_readable_tmpfiles=yes
 interpreter_python=/usr/bin/python3
 
+# diagnostics
+# DB on host5
+psql -h 192.168.0.4 -U umovie -d dbmovie
+    \d 
+    select * from movies
+# API on host3
+sudo journalctl -u  movieapi
+sudo cat /opt/movieapi/bin/config/application.properties
+ssh deployuser@host3 "systemctl status movieapi"
 

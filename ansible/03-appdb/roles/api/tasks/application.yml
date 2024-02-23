@@ -39,6 +39,7 @@
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
     mode: '0750'
+  notify: "Restart {{ app_notify }}"
 
 - name: Copy config
   ansible.builtin.template:
@@ -48,3 +49,4 @@
     group: "{{ app_group }}"
     mode: '0640'
   when: app_config
+  notify: "Restart {{ app_notify }}"

@@ -1,0 +1,30 @@
+# disable H2 console
+spring.h2.console.enabled={{ app_h2_console_enabled | default('true') }}
+
+# JPA configuration
+# -----------------
+
+# - JDBC URL
+spring.datasource.url={{ app_jdbc_url }}
+# - CREDENTIALS
+spring.datasource.username={{ db_app_user }}
+spring.datasource.password={{ db_app_password }}
+# - GENERATE DDL
+spring.jpa.hibernate.ddl-auto={{ app_generate_ddl_auto | default('none') }}
+# - (pretty) print SQL
+spring.jpa.show-sql={{ app_show_sql  | default('false') }}
+spring.jpa.properties.hibernate.format_sql={{ app_format_sql  | default('false') }}
+# disable old spring default setting annoying for a rest API
+spring.jpa.open-in-view=false
+
+# WEB configuration
+-------------------
+
+# Configure HTTP Port
+server.port={{ app_port }}
+
+# Log configuration
+# -----------------
+
+# All my components
+logging.level.org.example.movieapi={{ app_log_level | default('INFO') }}
