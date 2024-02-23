@@ -8,7 +8,8 @@
   tags: [PACKAGE]
     
 - include_tasks: application.yml
-  # tags: [APPLICATION] => not very useful
+  # tags: [APPLICATION] => not very useful with -t, OK with --skip-tags
+  tags: [APPLICATION]
   vars:
     app_port: "{{ appli.app_port }}"
     app_name: "{{ appli.app_name }}"
@@ -22,4 +23,6 @@
   loop_control:
     loop_var: appli
 
+- import_tasks: service.yml
+  tags: [SERVICE]
 

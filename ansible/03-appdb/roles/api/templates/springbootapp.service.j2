@@ -1,0 +1,12 @@
+[Unit]
+Description=A Spring Boot application
+After=syslog.target
+
+[Service]
+User={{ app_user }}
+WorkingDirectory={{ app_dir }}
+ExecStart=java -jar {{ app_binary | basename }}
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

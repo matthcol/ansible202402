@@ -1,0 +1,18 @@
+---
+- vars:
+    app_name: "{{ app_list[1].app_name }}"
+  block:
+  - name: "Movie API service description"
+    vars:
+      app_binary: "{{ app_list[1].app_binary }}"
+      app_user: "{{ app_list[1].app_user }}"
+      app_dir: /opt/{{ app_name }}/bin
+    ansible.builtin.template:
+      src: springbootapp.service.j2
+      dest: "/usr/lib/systemd/system/{{ app_name }}.service"
+  - name: "Movie API service enabled and started"
+    ansible.builtin.systemd_service:
+      name: "{{ app_name }}"
+      state: started
+      enabled: true
+  

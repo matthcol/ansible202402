@@ -1,0 +1,6 @@
+---
+- name: PostgreSQL service
+  ansible.builtin.systemd_service:
+    name: postgresql
+    state: started
+    enabled: true
