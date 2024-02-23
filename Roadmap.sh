@@ -86,3 +86,9 @@ ansible-playbook -u deployuser -i hosts --start-at-task "Prepare Filesystem" dep
 ansible-playbook -u deployuser -i hosts -t "API" --skip-tags "USER,FS"  deploy-playbook.yml
 ansible-playbook -u deployuser -i hosts --start-at-task "Prepare Filesystem" deploy-playbook.yml
 
+# ansible.cfg to allow privilege desescalation (not entirely secure)
+[defaults]
+allow_world_readable_tmpfiles=yes
+interpreter_python=/usr/bin/python3
+
+

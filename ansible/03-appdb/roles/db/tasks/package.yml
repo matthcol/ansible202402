@@ -10,6 +10,7 @@
     - net-tools
     - vim
     - tree
+    - python3-psycopg2
 
 - name: Debug Ansible Facts and variables
     - never

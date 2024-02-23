@@ -1,0 +1,11 @@
+---
+# https://docs.ansible.com/ansible/latest/collections/community/postgresql/index.html
+- become: true
+  become_user: postgres
+  become_method: su
+  become_exe: "sudo su -"
+  block:
+  - name: DB user
+    community.postgresql.postgresql_user:
+      name: "{{ pg_app_user }}"
+      password: "{{ pg_app_password }}"

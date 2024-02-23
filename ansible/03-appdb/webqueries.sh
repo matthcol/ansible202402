@@ -1,18 +1,18 @@
 # get all movie
-curl -X 'GET' 'http://host4:8080/api/movie'
+curl -X 'GET' 'http://host3:8080/api/movie'
 
 # get movie by id
-curl -X 'GET' 'http://host4:8080/api/movie/1'
+curl -X 'GET' 'http://host3:8080/api/movie/1'
 
 # search
-curl  -X 'GET'  'http://host4:8080/api/movie/search?t=barbie'
-curl  -X 'GET'  'http://host4:8080/api/movie/search?t=barbie&y1=2023&y2=2055'
-curl  -X 'GET'  'http://host4:8080/api/movie/search?t=barbie&y1=2023&y2=aaa'
+curl  -X 'GET'  'http://host3:8080/api/movie/search?t=barbie'
+curl  -X 'GET'  'http://host3:8080/api/movie/search?t=barbie&y1=2023&y2=2055'
+curl  -X 'GET'  'http://host3:8080/api/movie/search?t=barbie&y1=2023&y2=aaa'
 
 
 # add movie
  curl -X 'POST' \
-   'http://host4:8080/api/movie' \
+   'http://host3:8080/api/movie' \
    -H 'accept: */*' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -22,7 +22,7 @@ curl  -X 'GET'  'http://host4:8080/api/movie/search?t=barbie&y1=2023&y2=aaa'
  }'
 
   curl -v -X 'POST' \
-    'http://host4:8080/api/movie' \
+    'http://host3:8080/api/movie' \
     -H 'accept: */*' \
     -H 'Content-Type: application/json' \
     -d '{
@@ -33,7 +33,7 @@ curl  -X 'GET'  'http://host4:8080/api/movie/search?t=barbie&y1=2023&y2=aaa'
 
  #update
  curl -X 'PUT' \
-   'http://host4:8080/api/movie' \
+   'http://host3:8080/api/movie' \
    -H 'accept: */*' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -47,15 +47,15 @@ curl  -X 'GET'  'http://host4:8080/api/movie/search?t=barbie&y1=2023&y2=aaa'
 
  # delete
  curl -X 'DELETE' \
-   'http://host4:8080/api/movie/{id}?id=1' \
+   'http://host3:8080/api/movie/{id}?id=1' \
    -H 'accept: */*'
 
-curl -X 'DELETE'  'http://host4:8080/api/movie/{id}?id=5'
+curl -X 'DELETE'  'http://host3:8080/api/movie/{id}?id=5'
 
 
 # add person
  curl -X 'POST' \
-    'http://host4:8080/api/person' \
+    'http://host3:8080/api/person' \
     -H 'accept: */*' \
     -H 'Content-Type: application/json' \
     -d '{
@@ -66,7 +66,7 @@ curl -X 'DELETE'  'http://host4:8080/api/movie/{id}?id=5'
 # ------------  Invalid data  ------------------
 
  curl -X 'POST' \
-   'http://host4:8080/api/movie' \
+   'http://host3:8080/api/movie' \
    -H 'accept: */*' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -75,7 +75,7 @@ curl -X 'DELETE'  'http://host4:8080/api/movie/{id}?id=5'
  }'
 
  curl -X 'POST' \
-   'http://host4:8080/api/person' \
+   'http://host3:8080/api/person' \
    -H 'accept: */*' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -84,7 +84,7 @@ curl -X 'DELETE'  'http://host4:8080/api/movie/{id}?id=5'
  }'
 
 curl -X 'POST' \
-   'http://host4:8080/api/person' \
+   'http://host3:8080/api/person' \
    -H 'accept: */*' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -93,7 +93,7 @@ curl -X 'POST' \
  }'
 
  curl -X 'POST' \
-    'http://host4:8080/api/person' \
+    'http://host3:8080/api/person' \
     -H 'accept: */*' \
     -H 'Content-Type: application/json' \
     -d '{
@@ -103,7 +103,7 @@ curl -X 'POST' \
 
 
  curl -X 'POST' \
-   'http://host4:8080/api/movie' \
+   'http://host3:8080/api/movie' \
    -H 'accept: */*' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -113,7 +113,7 @@ curl -X 'POST' \
 
 # bad setDirector
 curl -X 'PATCH' \
-  'http://host4:8080/api/movie/{idMovie}/setDirector/{idDirector}?idMovie=0&idDirector=1' \
+  'http://host3:8080/api/movie/{idMovie}/setDirector/{idDirector}?idMovie=0&idDirector=1' \
   -H 'accept: */*'
 
 

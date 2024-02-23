@@ -1,2 +1,4 @@
 ---
 # defaults file for roles/common
+pg_app_user: umovie
+pg_app_password: password

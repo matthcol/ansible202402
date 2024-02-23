@@ -11,3 +11,7 @@
 - import_tasks: service.yml
   tags:
     - SERVICE
+
+- import_tasks: database.yml
+  tags:
+    - DATABASE
