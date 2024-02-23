@@ -1,0 +1,56 @@
+---
+- name: Play with simple variables
+  hosts: all
+  vars:
+    username: deployuser
+  tasks:
+    - name: Debug var username
+      ansible.builtin.debug:
+        msg: variable username = {{ username }}
+    - name: Debug var port
+      vars:
+        port: 22
+      ansible.builtin.debug:
+        var: port
+    - name: Debug unknown var
+      ansible.builtin.debug:
+        msg: variable port = {{ port }}
+      ignore_errors: true
+    - name: Debug unknown var 2
+      ansible.builtin.debug:
+        var: port
+    - name: Debug 2 variables
+      ansible.builtin.debug:
+        msg: "var: {{ item }}"
+      loop:
+        - "{{ username }}"
+        - "{{ port | default('undefined') }}"
+- name: Play with complex variables
+  hosts: debian
+  tasks:
+    - name: Debug list
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop:
+        - "{{ mylist1 }}"
+        - "{{ mylist2 }}"
+        - "{{ mylist3 }}"
+        - "{{ mylist1[0] }}, ..., {{ mylist1[-1] }}"
+        - "{{ mylist1 | length }}"
+    - name: Debug dictionary
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop:
+        - "{{ mydict1 }}"
+        - "{{ mydict2 }}"
+
+    - name: Optional task
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop: "{{ mylist2 }}"
+      when: item > 20
+
+    - name: Optional task 2
+      ansible.builtin.debug:
+        msg: "never"
+      when: mylist2 | length > 20

@@ -1,0 +1,22 @@
+---
+- name: Create Deployment User
+  hosts: all
+  become: yes
+  vars:
+    username: deployuser
+  tasks:
+    - name: Create user
+      ansible.builtin.user:
+        name: "{{ username }}"
+        shell: /usr/bin/bash
+    - name: Add user in sudoers without password
+      community.general.sudoers:
+        name: "{{ username }}"
+        user: "{{ username }}"
+        commands: ALL
+    - name: Copy SSH key
+      ansible.posix.authorized_key:
+        user: "{{ username }}"
+        state: present
+        key: "{{ lookup('file', '/home/srvadmin/.ssh/id_rsa_deploy.pub') }}"
+        

@@ -1,0 +1,17 @@
+---
+- name: Remove Deployment User
+  hosts: all
+  become: yes
+  vars:
+    username: deployuser
+  tasks:
+    - name: remove user from sudoers
+      community.general.sudoers:
+        name: "{{ username }}"
+        state: absent
+    - name: remove user
+      ansible.builtin.user:
+        name: "{{ username }}"
+        state: absent
+        force: true
+        remove: true

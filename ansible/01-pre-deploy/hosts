@@ -1,0 +1,9 @@
+[rocky]
+host2
+host3
+host4
+
+[debian]
+host1
+host5
+host6

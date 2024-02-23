@@ -1,0 +1,10 @@
+mylist2:
+  - 12
+  - 33
+  - 44
+
+mydict1: {'name': 'Toulouse', 'cp': '31000'}
+
+mydict2:
+  name: 'Nantes'
+  cp: '44000'

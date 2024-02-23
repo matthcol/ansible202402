@@ -1,0 +1,5 @@
+---
+# tasks file for roles/common
+- name: Intro role common
+  ansible.builtin.debug:
+    msg: "Begin role common"

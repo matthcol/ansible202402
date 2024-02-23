@@ -1,8 +1,11 @@
-FROM debian:bullseye
-
+FROM debian:bookworm
 RUN mkdir /var/run/sshd; \
-    apt update && apt-get install -y tzdata openssh-server sudo python3; \
-    useradd -s /usr/bin/bash -m -G sudo srvadmin
+    apt update && apt-get install -y tzdata openssh-server sudo python3 ansible vim sshpass tree; \
+    useradd -s /usr/bin/bash -m -G sudo srvadmin; \
+    mkdir /home/srvadmin/ansible; \
+    chown srvadmin:srvadmin  /home/srvadmin/ansible; \
+    mkdir /mnt/artifacts; \
+    chown srvadmin:srvadmin  /mnt/artifacts
 
 # entrypoint
 RUN { \

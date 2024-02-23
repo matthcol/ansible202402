@@ -1,0 +1,8 @@
+---
+# vars file for roles/api
+app_port: 8080
+app_name: dummyapp
+app_user: john
+app_group: doe
+app_gid: 900
+app_uid: 900

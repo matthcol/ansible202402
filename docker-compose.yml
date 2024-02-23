@@ -1,27 +1,57 @@
-version: '3.5'
-
 services:
 
   pilot:
-    image: debianssh12
-    build: ./debianssh12
-    hostname: pilot
+    extends:
+      file: docker-common.yml
+      service: ansible
+    hostname: pilot.localdomain
     ports:
       - ${SSH_PORT0:-22}:22
-    volumes:
-      - ./ansible:/home/srvadmin/ansible
-      - ./artifacts:/mnt/artifacts
 
   host1:
-    image: debianssh12
-    build: ./debianssh12
-    hostname: host1
+    extends:
+      file: docker-common.yml
+      service: debianssh12
+    hostname: host1.localdomain
     ports:
       - ${SSH_PORT1:-23}:22
 
   host2:
-    image: rockyssh9
-    build: ./rockyssh9
-    hostname: host2
+    extends:
+      file: docker-common.yml
+      service: rockyssh9
+    hostname: host2.localdomain
     ports:
       - ${SSH_PORT2:-24}:22
+
+  host3:
+    extends:
+      file: docker-common.yml
+      service: rockysshsystemd9
+    hostname: host3.localdomain
+    ports:
+      - ${SSH_PORT3:-25}:22
+
+  host4:
+    extends:
+      file: docker-common.yml
+      service: rockysshsystemd9
+    hostname: host4.localdomain
+    ports:
+      - ${SSH_PORT4:-26}:22
+
+  host5:
+    extends:
+      file: docker-common.yml
+      service: debiansshsystem12
+    hostname: host5.localdomain
+    ports:
+      - ${SSH_PORT5:-27}:22
+
+  host6:
+    extends:
+      file: docker-common.yml
+      service: debiansshsystem12
+    hostname: host6.localdomain
+    ports:
+      - ${SSH_PORT6:-28}:22
