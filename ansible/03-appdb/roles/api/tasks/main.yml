@@ -8,7 +8,7 @@
   tags: [PACKAGE]
     
 - include_tasks: application.yml
-  tags: [APPLICATION]
+  # tags: [APPLICATION] => not very useful
   vars:
     app_port: "{{ appli.app_port }}"
     app_name: "{{ appli.app_name }}"

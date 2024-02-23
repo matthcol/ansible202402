@@ -1,7 +1,7 @@
 ---
 # vars file for roles/api
 app_list:
-  - app_port: 8081
+  - app_port: 8082
     app_name: dummyapp
     app_binary: /mnt/artifacts/app.sh
     app_config: /mnt/artifacts/app.cfg
