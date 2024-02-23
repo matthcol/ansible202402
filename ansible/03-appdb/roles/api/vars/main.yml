@@ -1,8 +1,19 @@
 ---
 # vars file for roles/api
-app_port: 8080
-app_name: dummyapp
-app_user: john
-app_group: doe
-app_gid: 900
-app_uid: 900
+app_list:
+  - app_port: 8081
+    app_name: dummyapp
+    app_binary: /mnt/artifacts/app.sh
+    app_config: /mnt/artifacts/app.cfg
+    app_user: john
+    app_group: doe
+    app_gid: 900
+    app_uid: 900
+  - app_port: 8080
+    app_name: movieapi
+    app_binary: /mnt/artifacts/movieapi-1.0.jar
+    app_config: null
+    app_user: renee
+    app_group: moviefan
+    app_gid: 901
+    app_uid: 901

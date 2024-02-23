@@ -1,0 +1,10 @@
+---
+- name: Install Base Packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+  loop:
+    - psmisc
+    - net-tools
+    - vim
+    - tree
+    - java-{{ java_version }}-openjdk

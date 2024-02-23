@@ -1,0 +1,50 @@
+---
+- name: Display application
+  ansible.builtin.debug:
+    msg: "Installing application {{ app_name }}"
+
+- name: Create group
+  tags:
+    - USER
+  ansible.builtin.group:
+    name: "{{ app_group }}"
+    gid: "{{ app_gid }}"
+
+- name: Create user
+  tags: USER
+  ansible.builtin.user:
+    name: "{{ app_user }}"
+    uid: "{{ app_uid }}"
+    group: "{{ app_group }}"
+    shell: /usr/bin/bash
+
+- name: Prepare Filesystem
+  tags:
+    - FS
+  ansible.builtin.file:
+    path: /opt/{{ app_name }}/{{ item }}
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: '0750'
+  loop:
+    - bin
+    - "{{ app_config_dir | default('etc') }}"
+    - "{{ app_log_dir | default('log') }}"
+
+- name: Copy api
+  ansible.builtin.copy:
+    src: "{{ app_binary }}"
+    dest: /opt/{{ app_name }}/bin
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: '0750'
+
+- name: Copy config
+  ansible.builtin.template:
+    src: "{{ app_config }}.j2"
+    dest: /opt/{{ app_name }}/{{ app_config_dir | default('etc') }}/{{ app_config | basename }}
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: '0640'
+  when: app_config
